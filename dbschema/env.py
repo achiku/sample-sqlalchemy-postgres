@@ -23,7 +23,7 @@ fileConfig(config.config_file_name)
 project_dir = os.path.abspath(os.getcwd())
 sys.path.append(project_dir)
 
-from db.models import Base  # NOQA
+from dbschema.models import Base  # NOQA
 target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
