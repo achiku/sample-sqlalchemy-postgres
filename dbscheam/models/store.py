@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from sqlalchemy import Column, DateTime, ForeignKey, Integer, String
-from sqlalchemy.dialects.postgresql import TEXT, BIGINT
+from sqlalchemy.dialects.postgresql import BIGINT, TEXT
+from sqlalchemy.orm import backref, relationship
 
 from . import Base
 
@@ -33,3 +34,6 @@ class Sale(Base):
     item_id = Column(BIGINT, ForeignKey('item.id'), nullable=False)
     paid_amount = Column(Integer, nullable=False)
     sold_at = Column(DateTime(timezone=True), nullable=False)
+
+    account = relationship('Account', backref=backref('sales'))
+    item = relationship('Item', backref=backref('item'))
