@@ -2,8 +2,13 @@
 Sample setup for Postgres partitioning with SQLAlchemy
 
 ```
-CREATE DATABASE pgtest;
-CREATE SCHEMA AUTHORIZATION pgparttest;
+CREATE USER pgtest;
+ALTER USER pgtest CREATEDB;
+ALTER USER pgtest CREATEUSER;
+-- login as pgtest
+CREATE DATABASE pgtest OWNER pgtest;
+CREATE USER store;
+CREATE SCHEMA store AUTHORIZATION store;
 ```
 
 ```

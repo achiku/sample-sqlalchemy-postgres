@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, CheckConstraint
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, String
 from sqlalchemy.dialects.postgresql import BIGINT, TEXT
+from sqlalchemy.sql.expression import text
 from sqlalchemy.orm import backref, relationship
 
 from . import Base
@@ -9,11 +10,8 @@ from . import Base
 class Account(Base):
 
     __tablename__ = 'account'
-    __table_args = (
-        CheckConstraint("status IN ('active', 'inactive', 'closed')"),
-    )
 
-    id = Column(BIGINT, primary_key=True)
+    id = Column(BIGINT, primary_key=True, server_default=text('account_next_id()'))
     email = Column(TEXT, nullable=False)
     status = Column(TEXT, nullable=False)
     phone_number = Column(TEXT, nullable=False)

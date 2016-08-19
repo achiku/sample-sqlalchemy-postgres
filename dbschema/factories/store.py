@@ -14,6 +14,7 @@ class AccountFactory(SQLAlchemyModelFactory):
 
     email = factory.Faker('email', locale='ja_JP')
     phone_number = factory.Faker('phone_number', locale='ja_JP')
+    status = 'active'
 
 
 class ItemFactory(SQLAlchemyModelFactory):

@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker
 
 engine = create_engine(
-    "postgresql+psycopg2://pgparttest@localhost/pgtest"
+    "postgresql+psycopg2://store@localhost/pgtest"
 )
 meta = MetaData(engine)
 Base = declarative_base(metadata=meta)
