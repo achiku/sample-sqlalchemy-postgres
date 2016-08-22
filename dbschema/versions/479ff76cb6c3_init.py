@@ -1,24 +1,25 @@
 """init
 
-Revision ID: 3a9238c817e5
-Revises: b1af7b0fd182
-Create Date: 2016-08-19 16:32:33.723017
+Revision ID: 479ff76cb6c3
+Revises: b928b8777217
+Create Date: 2016-08-22 16:41:29.106185
 
 """
 from alembic import op
 import sqlalchemy as sa
-
+from sqlalchemy.dialects import postgresql
 
 # revision identifiers, used by Alembic.
-revision = '3a9238c817e5'
-down_revision = 'b1af7b0fd182'
+revision = '479ff76cb6c3'
+down_revision = 'b928b8777217'
 branch_labels = None
 depends_on = None
 
 
 def upgrade():
     op.create_table('account',
-                    sa.Column('id', sa.BIGINT(), nullable=False),
+                    sa.Column('id', sa.BIGINT(), server_default=sa.text(
+                        'account_next_id()'), nullable=False),
                     sa.Column('email', sa.TEXT(), nullable=False),
                     sa.Column('status', sa.TEXT(), nullable=False),
                     sa.Column('phone_number', sa.TEXT(), nullable=False),
@@ -32,7 +33,8 @@ def upgrade():
                     sa.PrimaryKeyConstraint('id')
                     )
     op.create_table('sale',
-                    sa.Column('id', sa.BIGINT(), nullable=False),
+                    sa.Column('id', postgresql.UUID(), server_default=sa.text(
+                        'uuid_generate_v1mc()'), nullable=False),
                     sa.Column('account_id', sa.BIGINT(), nullable=False),
                     sa.Column('item_id', sa.BIGINT(), nullable=False),
                     sa.Column('paid_amount', sa.Integer(), nullable=False),

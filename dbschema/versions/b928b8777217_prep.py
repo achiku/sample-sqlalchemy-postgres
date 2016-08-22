@@ -1,15 +1,16 @@
-"""add id generation func
+"""prep
 
-Revision ID: b1af7b0fd182
+Revision ID: b928b8777217
 Revises:
-Create Date: 2016-08-19 14:15:46.052338
+Create Date: 2016-08-22 16:40:49.041455
 
 """
 from alembic import op
+# import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'b1af7b0fd182'
+revision = 'b928b8777217'
 down_revision = None
 branch_labels = None
 depends_on = None

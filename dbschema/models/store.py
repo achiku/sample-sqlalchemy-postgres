@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from sqlalchemy import Column, DateTime, ForeignKey, Integer, String
-from sqlalchemy.dialects.postgresql import BIGINT, TEXT
+from sqlalchemy.dialects.postgresql import BIGINT, TEXT, UUID
 from sqlalchemy.sql.expression import text
 from sqlalchemy.orm import backref, relationship
 
@@ -31,7 +31,7 @@ class Sale(Base):
 
     __tablename__ = 'sale'
 
-    id = Column(BIGINT, primary_key=True)
+    id = Column(UUID, primary_key=True, server_default=text('uuid_generate_v1mc()'))
     account_id = Column(BIGINT, ForeignKey('account.id'), nullable=False)
     item_id = Column(BIGINT, ForeignKey('item.id'), nullable=False)
     paid_amount = Column(Integer, nullable=False)
