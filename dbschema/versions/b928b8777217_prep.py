@@ -21,13 +21,13 @@ def upgrade():
     op.execute("""
     CREATE OR REPLACE FUNCTION account_next_id(OUT result bigint) AS $$
     DECLARE
-        our_epoch bigint := 1314220021721;
+        -- our_epoch bigint := 1314220021721;
+        our_epoch bigint := 1471867348295;
         seq_id bigint;
         now_millis bigint;
         shard_id int := 1;
     BEGIN
         SELECT nextval('account_id_seq') % 1024 INTO seq_id;
-
         SELECT FLOOR(EXTRACT(EPOCH FROM clock_timestamp()) * 1000) INTO now_millis;
         result := (now_millis - our_epoch) << 23;
         result := result | (shard_id << 10);
